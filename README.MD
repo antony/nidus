@@ -33,3 +33,8 @@ unstore show antony@enzy.org
 ```
 
 Unstore will show a simple password, and a complex password. You can choose which to use based on restrictions imposed by what the password is used for.
+
+### Credits
+
+* Word list for human readable passwords from [https://github.com/dariusk/corpora](https://github.com/dariusk/corpora).
+* Idea based roughly on a concept and implementation by [https://github.com/spaceshuttl/visionary](https://github.com/spaceshuttl/visionary)
