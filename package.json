@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "ava": "^0.21.0",
-    "sinon": "^2.3.8"
+    "sinon": "^2.3.8",
+    "vorpal": "^1.12.0"
   }
 }

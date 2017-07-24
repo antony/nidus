@@ -1,7 +1,5 @@
 'use strict'
 
-const { bootstrap } = require('./lib/cli')
+const { cli } = require('./lib/cli')
 
-bootstrap().then(cli => {
-  cli.parse(process.argv)
-})
+cli()
