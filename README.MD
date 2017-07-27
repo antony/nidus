@@ -14,25 +14,25 @@ Currently in early alpha - do not use for production.
 
 ```bash
 npm install -g unstore
-unstore --help
+unstore
 ```
 
 #### Slowstart
 
-On first run, unstore will look for a config file. If not found, it will prompt you to generate one.
+On first run, unstore will look for a config file. If not found, it will take you through the steps to generate one,
+and then exit.
+
+Once your configuration is generated, you can start to generate passwords:
 
 ```
-unstore config <master-password>
-```
-Where master-password is your master password for all passwords. Don't lose this!
-
-```
-unstore show antony@enzy.org
+unstore show http://www.example.com
 // Simple q15hBZw8mvxkIxW2
 // Complex XCCS8w/cq.B:^Hx6
 ```
 
-Unstore will show a simple password, and a complex password. You can choose which to use based on restrictions imposed by what the password is used for.
+Unstore will show a simple password, a complex password, and a readable password (a number of words).
+The length of these passwords is determined by 'blockSize' in your configuration steps.
+You can choose which to use based on restrictions imposed by what the password is used for.
 
 ### Credits
 
