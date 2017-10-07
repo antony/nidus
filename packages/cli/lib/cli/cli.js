@@ -97,9 +97,9 @@ function configured (conf) {
 }
 
 exports.cli = async function () {
-  let configuration
+  let api
   try {
-    configuration = await config.load()
+    api = await Api.create()
   } catch (e) {
     console.log(e)
     console.log(`No configuration file found at ${bold.red(config.DEFAULT_FILENAME)}, so we'll create a new one.\n`)

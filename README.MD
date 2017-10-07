@@ -28,10 +28,12 @@ Once your configuration is generated, you can start to generate passwords:
 unstore show http://www.example.com
 // Simple q15hBZw8mvxkIxW2
 // Complex XCCS8w/cq.B:^Hx6
+// Readable colors battery blackberry attraction bicycle allegiance
 ```
 
 Unstore will show a simple password, a complex password, and a readable password (a number of words).
-The length of these passwords is determined by 'blockSize' in your configuration steps.
+The length of the complex and simple passwords is determined by 'keyLength' in your configuration steps.
+The length of the readable password (in words, not characters), is determined by 'readableLength' in your configuration steps.
 You can choose which to use based on restrictions imposed by what the password is used for.
 
 ### Credits

@@ -1,0 +1,17 @@
+{
+  "name": "unstore",
+  "version": "1.0.0",
+  "description": "The password unstore",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "ava"
+  },
+  "author": "Antony Jones",
+  "license": "MIT",
+  "dependencies": {
+    "joi": "^10.6.0",
+    "jsonfile": "^3.0.1",
+    "scrypt-async": "^1.3.1"
+  }
+}
