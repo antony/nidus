@@ -3,23 +3,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    flex-direction: column;
   }
 
   .aligner-item {
     max-width: 50%;
   }
 
-  .aligner-item--bottom {
-    align-self: flex-end;
-}
+  .heading {
+    margin-bottom: 5vh;
+    font-size: 14vh;
+    font-family: 'Baloo Tama';
+  }
+
+  input {
+    border: 2px solid #fff;
+    background: transparent;
+    font-size: 4vh;
+  }
 </style>
 
 <div class="aligner">
+  <div class="heading aligner-item">
+    unstore
+  </div>
   <div class="aligner-item">
     <input type="password" />
-  </div>
-  <div class="aligner-item aligner-item--bottom">
-    unstore
   </div>
 </div>

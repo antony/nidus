@@ -13,7 +13,7 @@ const plugins = [
   url({
     limit: 1024 * 100,
     include: [
-      'lib/ui/components/**/*.woff2',
+      'lib/fonts/*.ttf',
       'lib/ui/components/**/*.svg'
     ]
   }),

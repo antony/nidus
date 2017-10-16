@@ -4,9 +4,8 @@
   "description": "GUI for the password unstore",
   "main": "index.js",
   "scripts": {
-    "start:cli": "node index.js",
     "test": "ava",
-    "watch:ui": "NODE_ENV=development rollup -wc lib/ui/rollup.config.js"
+    "watch": "NODE_ENV=development rollup -wc lib/ui/rollup.config.js"
   },
   "author": "Antony Jones",
   "license": "MIT",
