@@ -1,12 +1,11 @@
 {
-  "name": "unstore",
+  "name": "unstore-cli",
   "version": "1.0.0",
   "description": "The password unstore",
   "main": "index.js",
   "scripts": {
-    "start:cli": "node index.js",
-    "test": "ava",
-    "watch:ui": "NODE_ENV=development rollup -wc lib/ui/rollup.config.js"
+    "start": "node index.js",
+    "test": "ava"
   },
   "author": "Antony Jones",
   "license": "MIT",

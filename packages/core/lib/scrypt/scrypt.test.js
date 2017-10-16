@@ -4,7 +4,6 @@ import test from 'ava'
 import { generate } from '.'
 
 const options = {
-	masterPassword: 'password',
 	cost: 2,
 	blockSize: 1,
 	parallelization: 1
@@ -16,6 +15,6 @@ test('wraps scrypt', t => {
 
 test('resolves with encrypted string', async t => {
 	const encrypted = new Uint8Array([122, 60, 239])
-	const generated = await generate('aaa', options, 3)
+	const generated = await generate('aaa', 'password', options, 3)
 	t.deepEqual(generated, encrypted)
 })

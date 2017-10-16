@@ -1,7 +1,7 @@
 {
-  "name": "unstore",
+  "name": "unstore-gui",
   "version": "1.0.0",
-  "description": "The password unstore",
+  "description": "GUI for the password unstore",
   "main": "index.js",
   "scripts": {
     "start:cli": "node index.js",

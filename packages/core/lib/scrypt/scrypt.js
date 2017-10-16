@@ -2,8 +2,8 @@
 
 const scrypt = require('scrypt-async')
 
-exports.generate = function (keyword, options, length) {
-  const { masterPassword, cost, blockSize, parallelization } = options
+exports.generate = function (keyword, masterPassword, options, length) {
+  const { cost, blockSize, parallelization } = options
 
   return new Promise(resolve => {
     scrypt(keyword, masterPassword, {

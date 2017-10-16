@@ -3,14 +3,12 @@
 const { join } = require('path')
 const pkg = require('../../package.json')
 const cli = require('caporal')
-const config = require('../config')
-const { generate } = require('../service')
 const Vorpal = require('vorpal')
 const inquirer = require('inquirer')
-const fingerprint = require('../fingerprint')
 const { bold  } = require('chalk')
-const { validate } = require('../validation')
 const ora = require('ora')
+const Api = require('unstore')
+const { config, validation } = Api
 
 const clis = { 
   unconfigured: new Vorpal(),
@@ -18,6 +16,8 @@ const clis = {
 }
 
 async function unconfigured () {
+  console.log("It looks like you don't yet have a configuration file. Let's create a new one:")
+
   const answers = await inquirer.prompt([
     { 
       type: 'password',
@@ -29,7 +29,7 @@ async function unconfigured () {
       name: 'cost',
       message: 'Computational cost of password generation',
       validate: async input => {
-        return await validate(input, 'cost')
+        return await validation.validate(input, 'cost')
       }
     },
     { 
@@ -37,7 +37,7 @@ async function unconfigured () {
       name: 'blockSize',
       message: 'Blocksize for password generation',
       validate: async input => {
-        return await validate(input, 'blockSize')
+        return await validation.validate(input, 'blockSize')
       }
     },
     { 
@@ -45,7 +45,7 @@ async function unconfigured () {
       name: 'parallelization',
       message: 'Parallelisation for password generation',
       validate: async input => {
-        return await validate(input, 'parallelization')
+        return await validation.validate(input, 'parallelization')
       }
     },
     { 
@@ -53,7 +53,7 @@ async function unconfigured () {
       name: 'keyLength',
       message: 'Length in characters of simple/complex passwords',
       validate: async input => {
-        return await validate(input, 'keyLength')
+        return await validation.validate(input, 'keyLength')
       }
     },
     { 
@@ -61,7 +61,7 @@ async function unconfigured () {
       name: 'readableLength',
       message: 'Length in words of readable passwords',
       validate: async input => {
-        return await validate(input, 'readableLength')
+        return await validation.validate(input, 'readableLength')
       }
     }
   ])
@@ -74,7 +74,7 @@ async function unconfigured () {
   console.log('\n')
 }
 
-function configured (conf) {
+function configured (api) {
   clis.configured
     .delimiter('unstore>')
 
@@ -82,7 +82,7 @@ function configured (conf) {
     .command('show <keyword>', 'Create/show a password for a given keyword')
     .action(async function ({ keyword }, callback) {
       const wait = ora('Calculating passwords').start()
-      const { simple, complex, readable } = await generate(keyword, conf)
+      const { simple, complex, readable } = await api.generate(keyword)
       wait.succeed('Calculated passwords')
 
       this.log('\n')
@@ -101,8 +101,6 @@ exports.cli = async function () {
   try {
     api = await Api.create()
   } catch (e) {
-    console.log(e)
-    console.log(`No configuration file found at ${bold.red(config.DEFAULT_FILENAME)}, so we'll create a new one.\n`)
     return unconfigured()
   }
 
@@ -112,12 +110,14 @@ exports.cli = async function () {
       name: 'masterPassword',
       message: 'Enter master password',
       validate: async function (input) { 
-        const match = await fingerprint.compare(input, configuration.fingerprint)
-        return match || 'Master password is incorrect'
+        try {
+          return await api.login(input)
+        } catch (e) {
+          return e.message
+        }
       }
     }
   ])
-  
-  const conf = Object.assign({}, configuration, { masterPassword })
-  return configured(conf)
+
+  return configured(api)
 }

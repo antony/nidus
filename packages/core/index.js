@@ -1,24 +1,35 @@
 'use strict'
 
 const config = require('./lib/config')
-const { compare } = require('./lib/fingerprint')
-const { generate } = require('./lib/service')
+const fingerprint = require('./lib/fingerprint')
+const service = require('./lib/service')
+const validation = require('./lib/validation')
 
 class Api {
     constructor (config) {
         this.config = config
     }
 
-    fingerprint (password) {
-        return compare(input, this.config.fingerprint)
+    async login (password) {
+        const match = await fingerprint.compare(password, this.config.fingerprint)
+        if (!match) {
+            throw new Error('Master password is incorrect')
+        }
+        this.password = password
+        return match
     }
 
     generate (keyword) {
-        return generate(keyword, this.config)
+        return service.generate(keyword, this.password, this.config)
     }
 }
 
-exports.create = () => {
-    const conf = await config.load()
-    return new Api(conf)
+exports.create = async () => {
+    return config.load()
+    .then(conf => {
+      return new Api(conf)
+    })
 }
+
+exports.config = config
+exports.validation = validation
