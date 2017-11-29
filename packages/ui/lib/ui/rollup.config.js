@@ -14,7 +14,9 @@ const developmentMode = process.env.NODE_ENV === 'development'
 const plugins = [
   resolve(),
   commonjs({
-    include: 'node_modules/unstore/index.js',
+    include: [
+      'node_modules/unstore'
+    ],
   }),
   url({
     limit: 1024 * 100,

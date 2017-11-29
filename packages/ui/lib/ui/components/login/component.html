@@ -35,13 +35,9 @@
 </div>
 
 <script>
-  import { create } from 'unstore'
+  const { ipcRenderer } = window.require('electron')
 
   export default {
-    oncreate () {
-      this.api = unstore.create()
-    },
-
     data () {
       return {
         password: ''
@@ -49,13 +45,11 @@
     },
 
     methods: {
-      login (key) {
-        console.log(key)
-      },
-
-      async doLogin () {
-        const password = this.get('password')
-        console.log(await api.login(password))
+      login (event) {
+        if (event.code === 'Enter') {
+          const password = this.get('password')
+          ipcRenderer.send('login', { password })
+        }
       }
     }
   }
