@@ -30,6 +30,33 @@
     unstore
   </div>
   <div class="aligner-item">
-    <input type="password" />
+    <input bind:value="password" type="password" on:keyup="login(event)" />
   </div>
 </div>
+
+<script>
+  import { create } from 'unstore'
+
+  export default {
+    oncreate () {
+      this.api = unstore.create()
+    },
+
+    data () {
+      return {
+        password: ''
+      }
+    },
+
+    methods: {
+      login (key) {
+        console.log(key)
+      },
+
+      async doLogin () {
+        const password = this.get('password')
+        console.log(await api.login(password))
+      }
+    }
+  }
+</script>

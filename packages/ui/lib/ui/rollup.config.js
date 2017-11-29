@@ -6,10 +6,16 @@ import pkg from '../../package.json'
 import copy from 'rollup-plugin-copy'
 import serve from 'rollup-plugin-serve'
 import liveReload from 'rollup-plugin-livereload'
+import resolve from 'rollup-plugin-node-resolve'
+import commonjs from 'rollup-plugin-commonjs'
 
 const developmentMode = process.env.NODE_ENV === 'development'
 
 const plugins = [
+  resolve(),
+  commonjs({
+    include: 'node_modules/unstore/index.js',
+  }),
   url({
     limit: 1024 * 100,
     include: [
@@ -21,7 +27,7 @@ const plugins = [
     include: 'lib/ui/components/**/*.html'
   }),
   babel({
-    exclude: 'node_modules/**'
+    include: 'node_modules/unstore'
   })
 ]
 
