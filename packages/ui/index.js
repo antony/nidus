@@ -12,7 +12,7 @@ async function createWindow () {
   })
 
   mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
   await bootstrap()
 }
 

@@ -1,33 +1,6 @@
-<style>
-  .aligner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  .aligner-item {
-    max-width: 50%;
-  }
-
-  .heading {
-    margin-bottom: 5vh;
-    font-size: 14vh;
-    font-family: 'Baloo Tama';
-  }
-
-  input {
-    border: 2px solid #fff;
-    background: transparent;
-    font-size: 4vh;
-  }
-</style>
-
 <div class="aligner">
   <div class="heading aligner-item">
-    unstore
+    <h1>unstore</h1>
   </div>
   <div class="aligner-item">
     <input bind:value="password" type="password" on:keyup="login(event)" />
