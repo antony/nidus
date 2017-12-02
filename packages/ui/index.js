@@ -7,8 +7,8 @@ let mainWindow
 
 async function createWindow () {
   mainWindow = new BrowserWindow({
-    height: 400,
-    width: 260
+    height: 500,
+    width: 400
   })
 
   mainWindow.loadURL(`file://${__dirname}/dist/index.html`)

@@ -1,8 +1,10 @@
-{{#if configured}}
-<Login />
-{{else}}
-<Initialise />
-{{/if}}
+<div class="window">
+	{{#if configured}}
+	<Login />
+	{{else}}
+	<Initialise />
+	{{/if}}
+</div>
 
 <script>
 	import Login from '../login/component.html'

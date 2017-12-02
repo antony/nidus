@@ -8,6 +8,7 @@ import serve from 'rollup-plugin-serve'
 import liveReload from 'rollup-plugin-livereload'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
+import css from 'rollup-plugin-postcss'
 
 const developmentMode = process.env.NODE_ENV === 'development'
 
@@ -18,6 +19,7 @@ const plugins = [
       'node_modules/unstore'
     ],
   }),
+  css(),
   url({
     limit: 1024 * 100,
     include: [
@@ -26,7 +28,8 @@ const plugins = [
     ]
   }),
   svelte({
-    include: 'lib/ui/components/**/*.html'
+    include: 'lib/ui/components/**/*.html',
+    store: true
   }),
   babel({
     include: 'node_modules/unstore'

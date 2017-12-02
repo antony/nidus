@@ -1,11 +1,32 @@
-<div class="aligner">
-  <div class="heading aligner-item">
-    <h2>settings</h2>
-  </div>
-  <div class="aligner-item">
-    <input bind:value="password" type="password" />
-  </div>
+<header class="toolbar toolbar-header">
+  <h1 class="title">Setup</h1>
+</header>
+<div class="window-content">
+  <form>
+    <p>
+      No configuration found, so we'll create a new one.
+    </p>
+    <div class="form-group">
+      <label>Master password</label>
+      <input class="form-control" bind:value="password" type="password" />
+    </div>
+    <div class="form-group">
+      <label>Password length (characters)</label>
+      <input class="form-control" bind:value="keyLength" type="number" />
+    </div>
+    <div class="form-group">
+      <label>Readable password length (words)</label>
+      <input class="form-control" bind:value="readableLength" type="number" />
+    </div>
+  </form>
 </div>
+<footer class="toolbar toolbar-footer">
+  <div class="toolbar-actions">
+    <button on:click="configure()" class="btn btn-primary pull-right">
+      Save
+    </button>
+  </div>
+</footer>
 
 <script>
   const { ipcRenderer } = window.require('electron')
@@ -13,16 +34,24 @@
   export default {
     data () {
       return {
-        password: ''
+        password: '',
+        keyLength: 16,
+        readableLength: 8
       }
     },
 
+    oncreate () {
+      ipcRenderer.on('reload', () => {
+        console.log('reload')
+      })
+    },
+
     methods: {
-      login (event) {
-        if (event.code === 'Enter') {
-          const password = this.get('password')
-          ipcRenderer.send('login', { password })
-        }
+      configure () {
+        const password = this.get('password')
+        const keyLength = this.get('keyLength')
+        const readableLength = this.get('readableLength')
+        ipcRenderer.send('config:save', { password, keyLength, readableLength })
       }
     }
   }
