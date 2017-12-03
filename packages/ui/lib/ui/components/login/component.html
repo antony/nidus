@@ -1,7 +1,7 @@
-<div class="aligner">
-  <div class="heading aligner-item">
-    <h1>unstore</h1>
-  </div>
+<header class="toolbar toolbar-header">
+  <h1 class="title">Unlock</h1>
+</header>
+<div class="window-content">
   <div class="aligner-item">
     <input bind:value="password" type="password" on:keyup="login(event)" />
   </div>
@@ -21,6 +21,7 @@
       login (event) {
         if (event.code === 'Enter') {
           const password = this.get('password')
+          console.log('wi0ll login with', password)
           ipcRenderer.send('login', { password })
         }
       }

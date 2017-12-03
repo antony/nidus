@@ -3,6 +3,8 @@
 const { ipcMain } = require('electron')
 const unstore = require('unstore')
 
+let api
+
 ipcMain.on('config:save', async (event, { password, keyLength, readableLength }) => {
   await unstore.config.persist({
     masterPassword: password,
@@ -12,11 +14,27 @@ ipcMain.on('config:save', async (event, { password, keyLength, readableLength })
     keyLength,
     readableLength
   })
-  event.sender.send('reload')
+  event.sender.send('state:change', { state: 'login' })
 })
 
-ipcMain.on('login', () => console.log('do something'))
+ipcMain.on('generate', async (event, { keyword }) => {
+  event.sender.send('password:generated', await api.generate(keyword))
+})
 
-exports.bootstrap = async function () {
-  await unstore.create()
+ipcMain.on('login', async (event, { password }) => {
+  try {
+    await api.login(password)
+    event.sender.send('state:change', { state: 'generate' })
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+exports.bootstrap = async function (mainWindow) {
+  try {
+    api = await unstore.create()
+    mainWindow.webContents.send('state:change', { state: 'login' })
+  } catch (e) {
+    mainWindow.webContents.send('state:change', { state: 'setup' })
+  }
 }

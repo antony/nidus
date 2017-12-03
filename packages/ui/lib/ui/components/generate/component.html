@@ -1,0 +1,64 @@
+<header class="toolbar toolbar-header">
+  <h1 class="title">Generate</h1>
+</header>
+<div class="window-content">
+  <div class="aligner-item">
+    <p>
+      generate a password
+    </p>
+    <div class="form-group">
+      <label>Enter seed</label>
+      <input bind:value="keyword" type="text" on:keyup="generate(event)" />
+    </div>
+    {{#if generated}}
+    <dl>
+      <dd>
+        Simple:
+      </dd>
+      <dt>
+        {{ simple }}
+      </dt>
+      <dd>
+        Complex:
+      </dd>
+      <dt>
+        {{ complex }}
+      </dt>
+      <dd>
+        Readable:
+      </dd>
+      <dt>
+        {{ readable }}
+      </dt>
+    </dl>
+    {{/if}}
+  </div>
+</div>
+
+<script>
+  const { ipcRenderer } = window.require('electron')
+
+  export default {
+    data () {
+      return {
+        generated: false,
+        keyword: ''
+      }
+    },
+
+    oncreate () {
+      ipcRenderer.on('password:generated', (event, { simple, complex, readable }) => {
+        this.set({ generated: true, simple, complex, readable })
+			})
+    },
+
+    methods: {
+      generate (event) {
+        if (event.code === 'Enter') {
+          const keyword = this.get('keyword')
+          ipcRenderer.send('generate', { keyword })
+        }
+      }
+    }
+  }
+</script>

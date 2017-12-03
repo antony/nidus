@@ -1,18 +1,34 @@
 <div class="window">
-	{{#if configured}}
+	{{#if state === 'login'}}
 	<Login />
-	{{else}}
+	{{/if}}
+	{{#if state === 'setup'}}
 	<Initialise />
+	{{/if}}
+	{{#if state === 'generate'}}
+	<Generate />
 	{{/if}}
 </div>
 
 <script>
 	import Login from '../login/component.html'
 	import Initialise from '../initialise/component.html'
+	import Generate from '../generate/component.html'
+	const { ipcRenderer } = window.require('electron')
+
   export default {
+		oncreate () {
+			ipcRenderer.on('state:change', (event, { state }) => {
+				console.log('state changed to', state)
+        this.set({ state })
+			})
+			ipcRenderer.send('application:bootstrap')
+		},
+
 		components: {
 			Initialise,
-			Login
+			Login,
+			Generate
 		}
   }
 </script>

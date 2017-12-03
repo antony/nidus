@@ -40,12 +40,6 @@
       }
     },
 
-    oncreate () {
-      ipcRenderer.on('reload', () => {
-        console.log('reload')
-      })
-    },
-
     methods: {
       configure () {
         const password = this.get('password')

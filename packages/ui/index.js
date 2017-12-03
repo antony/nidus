@@ -1,6 +1,6 @@
 'use strict'
 
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const { bootstrap } = require('./src/application')
 
 let mainWindow
@@ -12,11 +12,13 @@ async function createWindow () {
   })
 
   mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
-  //mainWindow.webContents.openDevTools()
-  await bootstrap()
 }
 
 app.on('ready', createWindow)
+
+ipcMain.on('application:bootstrap', () => {
+  return bootstrap(mainWindow)
+})
 
 app.on('activate', async function () {
   if (mainWindow === null) {
