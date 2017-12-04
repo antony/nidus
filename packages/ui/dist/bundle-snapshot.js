@@ -235,14 +235,23 @@ var methods = {
   login (event) {
     if (event.code === 'Enter') {
       const password = this.get('password');
-      console.log('wi0ll login with', password);
       ipcRenderer$1.send('login', { password });
     }
+    event.preventDefault();
+    return false
   }
 };
 
+function oncreate$1() {
+  ipcRenderer$1.on('login:error', (event, { message }) => {
+    this.set({ message });
+			});
+}
+
 function create_main_fragment$1(state, component) {
-	var header, text_2, div, div_1, input, input_updating = false;
+	var header, text_2, div, text_3, form, div_1, label, text_5, input, input_updating = false;
+
+	var if_block = (state.message) && create_if_block$1(state, component);
 
 	function input_input_handler() {
 		input_updating = true;
@@ -260,7 +269,13 @@ function create_main_fragment$1(state, component) {
 			header.innerHTML = "<h1 class=\"title\">Unlock</h1>";
 			text_2 = createText("\n");
 			div = createElement("div");
+			if (if_block) if_block.c();
+			text_3 = createText("\n  ");
+			form = createElement("form");
 			div_1 = createElement("div");
+			label = createElement("label");
+			label.textContent = "Master password";
+			text_5 = createText("\n      ");
 			input = createElement("input");
 			this.h();
 		},
@@ -270,7 +285,8 @@ function create_main_fragment$1(state, component) {
 			addListener(input, "input", input_input_handler);
 			input.type = "password";
 			addListener(input, "keyup", keyup_handler);
-			div_1.className = "aligner-item";
+			div_1.className = "form-group";
+			form.action = "#";
 			div.className = "window-content";
 		},
 
@@ -278,13 +294,32 @@ function create_main_fragment$1(state, component) {
 			insertNode(header, target, anchor);
 			insertNode(text_2, target, anchor);
 			insertNode(div, target, anchor);
-			appendNode(div_1, div);
+			if (if_block) if_block.m(div, null);
+			appendNode(text_3, div);
+			appendNode(form, div);
+			appendNode(div_1, form);
+			appendNode(label, div_1);
+			appendNode(text_5, div_1);
 			appendNode(input, div_1);
 
 			input.value = state.password;
 		},
 
 		p: function update(changed, state) {
+			if (state.message) {
+				if (if_block) {
+					if_block.p(changed, state);
+				} else {
+					if_block = create_if_block$1(state, component);
+					if_block.c();
+					if_block.m(div, text_3);
+				}
+			} else if (if_block) {
+				if_block.u();
+				if_block.d();
+				if_block = null;
+			}
+
 			if (!input_updating) input.value = state.password;
 		},
 
@@ -292,12 +327,43 @@ function create_main_fragment$1(state, component) {
 			detachNode(header);
 			detachNode(text_2);
 			detachNode(div);
+			if (if_block) if_block.u();
 		},
 
 		d: function destroy$$1() {
+			if (if_block) if_block.d();
 			removeListener(input, "input", input_input_handler);
 			removeListener(input, "keyup", keyup_handler);
 		}
+	};
+}
+
+// (5:2) {{#if message}}
+function create_if_block$1(state, component) {
+	var p, text;
+
+	return {
+		c: function create() {
+			p = createElement("p");
+			text = createText(state.message);
+		},
+
+		m: function mount(target, anchor) {
+			insertNode(p, target, anchor);
+			appendNode(text, p);
+		},
+
+		p: function update(changed, state) {
+			if (changed.message) {
+				text.data = state.message;
+			}
+		},
+
+		u: function unmount() {
+			detachNode(p);
+		},
+
+		d: noop
 	};
 }
 
@@ -305,11 +371,21 @@ function Component$1(options) {
 	init(this, options);
 	this._state = assign(data(), options.data);
 
+	var _oncreate = oncreate$1.bind(this);
+
+	if (!options._root) {
+		this._oncreate = [_oncreate];
+	} else {
+	 	this._root._oncreate.push(_oncreate);
+	 }
+
 	this._fragment = create_main_fragment$1(this._state, this);
 
 	if (options.target) {
 		this._fragment.c();
 		this._fragment.m(options.target, options.anchor || null);
+
+		callAll(this._oncreate);
 	}
 }
 
@@ -504,18 +580,20 @@ var methods$2 = {
     if (event.code === 'Enter') {
       const keyword = this.get('keyword');
       ipcRenderer$3.send('generate', { keyword });
+      event.preventDefault();
     }
+    return false
   }
 };
 
-function oncreate$1() {
-  ipcRenderer$3.on('password:generated', (event, { simple, complex, readable }) => {
+function oncreate$2() {
+  ipcRenderer$3.on('generate:results', (event, { simple, complex, readable }) => {
     this.set({ generated: true, simple, complex, readable });
 			});
 }
 
 function create_main_fragment$3(state, component) {
-	var header, text_2, div, div_1, p, text_4, div_2, label, text_6, input, input_updating = false, text_8;
+	var header, text_2, div, p, text_4, form, div_1, label, text_6, input, input_updating = false, text_9;
 
 	function input_input_handler() {
 		input_updating = true;
@@ -527,7 +605,7 @@ function create_main_fragment$3(state, component) {
 		component.generate(event);
 	}
 
-	var if_block = (state.generated) && create_if_block$1(state, component);
+	var if_block = (state.generated) && create_if_block$2(state, component);
 
 	return {
 		c: function create() {
@@ -535,16 +613,16 @@ function create_main_fragment$3(state, component) {
 			header.innerHTML = "<h1 class=\"title\">Generate</h1>";
 			text_2 = createText("\n");
 			div = createElement("div");
-			div_1 = createElement("div");
 			p = createElement("p");
 			p.textContent = "generate a password";
-			text_4 = createText("\n    ");
-			div_2 = createElement("div");
+			text_4 = createText("\n  ");
+			form = createElement("form");
+			div_1 = createElement("div");
 			label = createElement("label");
 			label.textContent = "Enter seed";
 			text_6 = createText("\n      ");
 			input = createElement("input");
-			text_8 = createText("\n    ");
+			text_9 = createText("\n  ");
 			if (if_block) if_block.c();
 			this.h();
 		},
@@ -554,8 +632,8 @@ function create_main_fragment$3(state, component) {
 			addListener(input, "input", input_input_handler);
 			input.type = "text";
 			addListener(input, "keyup", keyup_handler);
-			div_2.className = "form-group";
-			div_1.className = "aligner-item";
+			div_1.className = "form-group";
+			form.action = "#";
 			div.className = "window-content";
 		},
 
@@ -563,18 +641,18 @@ function create_main_fragment$3(state, component) {
 			insertNode(header, target, anchor);
 			insertNode(text_2, target, anchor);
 			insertNode(div, target, anchor);
-			appendNode(div_1, div);
-			appendNode(p, div_1);
-			appendNode(text_4, div_1);
-			appendNode(div_2, div_1);
-			appendNode(label, div_2);
-			appendNode(text_6, div_2);
-			appendNode(input, div_2);
+			appendNode(p, div);
+			appendNode(text_4, div);
+			appendNode(form, div);
+			appendNode(div_1, form);
+			appendNode(label, div_1);
+			appendNode(text_6, div_1);
+			appendNode(input, div_1);
 
 			input.value = state.keyword;
 
-			appendNode(text_8, div_1);
-			if (if_block) if_block.m(div_1, null);
+			appendNode(text_9, div);
+			if (if_block) if_block.m(div, null);
 		},
 
 		p: function update(changed, state) {
@@ -584,9 +662,9 @@ function create_main_fragment$3(state, component) {
 				if (if_block) {
 					if_block.p(changed, state);
 				} else {
-					if_block = create_if_block$1(state, component);
+					if_block = create_if_block$2(state, component);
 					if_block.c();
-					if_block.m(div_1, null);
+					if_block.m(div, null);
 				}
 			} else if (if_block) {
 				if_block.u();
@@ -610,8 +688,8 @@ function create_main_fragment$3(state, component) {
 	};
 }
 
-// (13:4) {{#if generated}}
-function create_if_block$1(state, component) {
+// (14:2) {{#if generated}}
+function create_if_block$2(state, component) {
 	var dl, dd, dt, text_1, dd_1, dt_1, text_4, dd_2, dt_2, text_7;
 
 	return {
@@ -670,7 +748,7 @@ function Component$3(options) {
 	init(this, options);
 	this._state = assign(data$2(), options.data);
 
-	var _oncreate = oncreate$1.bind(this);
+	var _oncreate = oncreate$2.bind(this);
 
 	if (!options._root) {
 		this._oncreate = [_oncreate];

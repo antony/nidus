@@ -2,9 +2,17 @@
   <h1 class="title">Unlock</h1>
 </header>
 <div class="window-content">
-  <div class="aligner-item">
-    <input bind:value="password" type="password" on:keyup="login(event)" />
-  </div>
+  {{#if message}}
+  <p>
+    {{ message }}
+  </p>
+  {{/if}}
+  <form action="#">
+    <div class="form-group">
+      <label>Master password</label>
+      <input bind:value="password" type="password" on:keyup="login(event)" />
+    </div>
+  </form>
 </div>
 
 <script>
@@ -17,13 +25,20 @@
       }
     },
 
+    oncreate () {
+      ipcRenderer.on('login:error', (event, { message }) => {
+        this.set({ message })
+			})
+    },
+
     methods: {
       login (event) {
         if (event.code === 'Enter') {
           const password = this.get('password')
-          console.log('wi0ll login with', password)
           ipcRenderer.send('login', { password })
         }
+        event.preventDefault()
+        return false
       }
     }
   }

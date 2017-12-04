@@ -18,7 +18,7 @@ ipcMain.on('config:save', async (event, { password, keyLength, readableLength })
 })
 
 ipcMain.on('generate', async (event, { keyword }) => {
-  event.sender.send('password:generated', await api.generate(keyword))
+  event.sender.send('generate:results', await api.generate(keyword))
 })
 
 ipcMain.on('login', async (event, { password }) => {
@@ -26,7 +26,8 @@ ipcMain.on('login', async (event, { password }) => {
     await api.login(password)
     event.sender.send('state:change', { state: 'generate' })
   } catch (e) {
-    console.log(e)
+    console.log('got an error', e)
+    event.sender.send('login:error', { message: e.message })
   }
 })
 
