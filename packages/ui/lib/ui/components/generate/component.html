@@ -5,7 +5,7 @@
   <div>
     <form action="#">
       <p>
-        generate a password
+        Enter a keyword to generate a password. For example the url for a site you are trying to log into.
       </p>
       <div class="form-group">
         <label>Enter seed</label>
@@ -15,32 +15,58 @@
   </div>
   <div>
     {{#if generated}}
+    <p>
+      Your generated passwords
+    </p>
     <dl>
       <dd>
         Simple:
       </dd>
       <dt>
         {{ simple }}
+        <span class="hover-hidden" on:click="copy(simple)">&#x1f4cb;</span>
       </dt>
       <dd>
         Complex:
       </dd>
       <dt>
         {{ complex }}
+        <span class="hover-hidden" on:click="copy(complex)">&#x1f4cb;</span>
       </dt>
       <dd>
         Readable:
       </dd>
       <dt>
         {{ readable }}
+        <span class="hover-hidden" on:click="copy(readable)">&#x1f4cb;</span>
       </dt>
     </dl>
     {{/if}}
   </div>
 </div>
 
+<style>
+  dl > dd {
+    font-weight: bold;
+    margin: 2vw 0 0 0;
+  }
+  dl > dt {
+    background-color: lightgoldenrodyellow;
+    border: 1px solid lightgray;
+    padding: 2vw;
+  }
+  dt > .hover-hidden {
+    font-weight: bold;
+    visibility: hidden;
+    float: right;
+  }
+  dt:hover > .hover-hidden {
+    visibility: visible;
+  }
+</style>
+
 <script>
-  const { ipcRenderer } = window.require('electron')
+  const { ipcRenderer, clipboard } = window.require('electron')
 
   export default {
     data () {
@@ -64,6 +90,9 @@
           event.preventDefault()
         }
         return false
+      },
+      copy (text) {
+        clipboard.writeText(text)
       }
     }
   }

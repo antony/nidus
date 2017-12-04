@@ -3,25 +3,23 @@
 </header>
 <div class="window-content">
   <form action="#">
-    {{#if message}}
-    <p>
-      {{ message }}
-    </p>
-    {{/if}}
     <div class="form-group">
       <label>Master password</label>
       <input class="form-control" bind:value="password" type="password" on:keyup="login(event)" />
+      <ErrorMessage message="{{message}}" />
     </div>
   </form>
 </div>
 
 <script>
+  import ErrorMessage from '../error-message/component.html'
   const { ipcRenderer } = window.require('electron')
 
   export default {
     data () {
       return {
-        password: '' 
+        password: '',
+        message: null
       }
     },
 
@@ -40,6 +38,10 @@
         event.preventDefault()
         return false
       }
+    },
+
+    components: {
+      ErrorMessage
     }
   }
 </script>

@@ -36,19 +36,21 @@ const plugins = [
   })
 ]
 
-const production = [
-  uglify()
-]
+function getDevelopmentPlugins () {
+  return [
+    copy({
+      'lib/ui/app.html': 'dist/index.html'
+    }),
+    serve('dist'),
+    liveReload()
+  ]
+}
 
-const development = [
-  copy({
-    'lib/ui/app.html': 'dist/index.html'
-  }),
-  serve('dist'),
-  liveReload({
-    watch: 'dist'
-  })
-]
+function getProductionPlugins () {
+  return [
+    uglify()
+  ]
+}
 
 const version = developmentMode ? 'snapshot' : `${pkg.version}.min`
 export default {
@@ -58,5 +60,5 @@ export default {
     format: 'iife',
     name: 'bundle'
   },
-  plugins: plugins.concat(developmentMode ? development : production)
+  plugins: plugins.concat(developmentMode ? getDevelopmentPlugins() : getProductionPlugins())
 }
