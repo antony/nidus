@@ -2,15 +2,15 @@
   <h1 class="title">Unlock</h1>
 </header>
 <div class="window-content">
-  {{#if message}}
-  <p>
-    {{ message }}
-  </p>
-  {{/if}}
   <form action="#">
+    {{#if message}}
+    <p>
+      {{ message }}
+    </p>
+    {{/if}}
     <div class="form-group">
       <label>Master password</label>
-      <input bind:value="password" type="password" on:keyup="login(event)" />
+      <input class="form-control" bind:value="password" type="password" on:keyup="login(event)" />
     </div>
   </form>
 </div>
@@ -21,7 +21,7 @@
   export default {
     data () {
       return {
-        password: ''
+        password: '' 
       }
     },
 

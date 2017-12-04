@@ -5,7 +5,7 @@ const { bootstrap } = require('./src/application')
 
 let mainWindow
 
-async function createWindow () {
+function createWindow () {
   mainWindow = new BrowserWindow({
     height: 500,
     width: 400
@@ -25,4 +25,3 @@ app.on('activate', async function () {
     await createWindow()
   }
 })
-

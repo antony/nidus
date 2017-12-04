@@ -63,6 +63,10 @@ function removeListener(node, event, handler) {
 	node.removeEventListener(event, handler, false);
 }
 
+function setAttribute(node, attribute, value) {
+	node.setAttribute(attribute, value);
+}
+
 function toNumber(value) {
 	return value === '' ? undefined : +value;
 }
@@ -227,7 +231,7 @@ const { ipcRenderer: ipcRenderer$1 } = window.require('electron');
 
 function data() {
   return {
-    password: ''
+    password: '' 
   }
 }
 
@@ -249,7 +253,7 @@ function oncreate$1() {
 }
 
 function create_main_fragment$1(state, component) {
-	var header, text_2, div, text_3, form, div_1, label, text_5, input, input_updating = false;
+	var header, text_2, div, form, text_3, div_1, label, text_5, input, input_updating = false;
 
 	var if_block = (state.message) && create_if_block$1(state, component);
 
@@ -269,9 +273,9 @@ function create_main_fragment$1(state, component) {
 			header.innerHTML = "<h1 class=\"title\">Unlock</h1>";
 			text_2 = createText("\n");
 			div = createElement("div");
-			if (if_block) if_block.c();
-			text_3 = createText("\n  ");
 			form = createElement("form");
+			if (if_block) if_block.c();
+			text_3 = createText("\n    ");
 			div_1 = createElement("div");
 			label = createElement("label");
 			label.textContent = "Master password";
@@ -283,6 +287,7 @@ function create_main_fragment$1(state, component) {
 		h: function hydrate() {
 			header.className = "toolbar toolbar-header";
 			addListener(input, "input", input_input_handler);
+			input.className = "form-control";
 			input.type = "password";
 			addListener(input, "keyup", keyup_handler);
 			div_1.className = "form-group";
@@ -294,9 +299,9 @@ function create_main_fragment$1(state, component) {
 			insertNode(header, target, anchor);
 			insertNode(text_2, target, anchor);
 			insertNode(div, target, anchor);
-			if (if_block) if_block.m(div, null);
-			appendNode(text_3, div);
 			appendNode(form, div);
+			if (if_block) if_block.m(form, null);
+			appendNode(text_3, form);
 			appendNode(div_1, form);
 			appendNode(label, div_1);
 			appendNode(text_5, div_1);
@@ -312,7 +317,7 @@ function create_main_fragment$1(state, component) {
 				} else {
 					if_block = create_if_block$1(state, component);
 					if_block.c();
-					if_block.m(div, text_3);
+					if_block.m(form, text_3);
 				}
 			} else if (if_block) {
 				if_block.u();
@@ -338,7 +343,7 @@ function create_main_fragment$1(state, component) {
 	};
 }
 
-// (5:2) {{#if message}}
+// (6:4) {{#if message}}
 function create_if_block$1(state, component) {
 	var p, text;
 
@@ -593,7 +598,7 @@ function oncreate$2() {
 }
 
 function create_main_fragment$3(state, component) {
-	var header, text_2, div, p, text_4, form, div_1, label, text_6, input, input_updating = false, text_9;
+	var header, text_2, div, div_1, form, p, text_4, div_2, label, text_6, input, input_updating = false, text_10, div_3;
 
 	function input_input_handler() {
 		input_updating = true;
@@ -613,16 +618,18 @@ function create_main_fragment$3(state, component) {
 			header.innerHTML = "<h1 class=\"title\">Generate</h1>";
 			text_2 = createText("\n");
 			div = createElement("div");
+			div_1 = createElement("div");
+			form = createElement("form");
 			p = createElement("p");
 			p.textContent = "generate a password";
-			text_4 = createText("\n  ");
-			form = createElement("form");
-			div_1 = createElement("div");
+			text_4 = createText("\n      ");
+			div_2 = createElement("div");
 			label = createElement("label");
 			label.textContent = "Enter seed";
-			text_6 = createText("\n      ");
+			text_6 = createText("\n        ");
 			input = createElement("input");
-			text_9 = createText("\n  ");
+			text_10 = createText("\n  ");
+			div_3 = createElement("div");
 			if (if_block) if_block.c();
 			this.h();
 		},
@@ -630,9 +637,10 @@ function create_main_fragment$3(state, component) {
 		h: function hydrate() {
 			header.className = "toolbar toolbar-header";
 			addListener(input, "input", input_input_handler);
+			input.className = "form-control";
 			input.type = "text";
 			addListener(input, "keyup", keyup_handler);
-			div_1.className = "form-group";
+			div_2.className = "form-group";
 			form.action = "#";
 			div.className = "window-content";
 		},
@@ -641,18 +649,20 @@ function create_main_fragment$3(state, component) {
 			insertNode(header, target, anchor);
 			insertNode(text_2, target, anchor);
 			insertNode(div, target, anchor);
-			appendNode(p, div);
-			appendNode(text_4, div);
-			appendNode(form, div);
-			appendNode(div_1, form);
-			appendNode(label, div_1);
-			appendNode(text_6, div_1);
-			appendNode(input, div_1);
+			appendNode(div_1, div);
+			appendNode(form, div_1);
+			appendNode(p, form);
+			appendNode(text_4, form);
+			appendNode(div_2, form);
+			appendNode(label, div_2);
+			appendNode(text_6, div_2);
+			appendNode(input, div_2);
 
 			input.value = state.keyword;
 
-			appendNode(text_9, div);
-			if (if_block) if_block.m(div, null);
+			appendNode(text_10, div);
+			appendNode(div_3, div);
+			if (if_block) if_block.m(div_3, null);
 		},
 
 		p: function update(changed, state) {
@@ -664,7 +674,7 @@ function create_main_fragment$3(state, component) {
 				} else {
 					if_block = create_if_block$2(state, component);
 					if_block.c();
-					if_block.m(div, null);
+					if_block.m(div_3, null);
 				}
 			} else if (if_block) {
 				if_block.u();
@@ -688,7 +698,7 @@ function create_main_fragment$3(state, component) {
 	};
 }
 
-// (14:2) {{#if generated}}
+// (17:4) {{#if generated}}
 function create_if_block$2(state, component) {
 	var dl, dd, dt, text_1, dd_1, dt_1, text_4, dd_2, dt_2, text_7;
 
@@ -773,10 +783,20 @@ const { ipcRenderer } = window.require('electron');
 
   function oncreate() {
 	ipcRenderer.on('state:change', (event, { state }) => {
-		console.log('state changed to', state);
         this.set({ state });
 	});
 	ipcRenderer.send('application:bootstrap');
+}
+
+function encapsulateStyles(node) {
+	setAttribute(node, "svelte-2993651394", "");
+}
+
+function add_css() {
+	var style = createElement("style");
+	style.id = 'svelte-2993651394-style';
+	style.textContent = "[svelte-2993651394].window > .window-content,[svelte-2993651394] .window > .window-content{flex-direction:column}";
+	appendNode(style, document.head);
 }
 
 function create_main_fragment(state, component) {
@@ -800,6 +820,7 @@ function create_main_fragment(state, component) {
 		},
 
 		h: function hydrate() {
+			encapsulateStyles(div);
 			div.className = "window";
 		},
 
@@ -946,6 +967,8 @@ function create_if_block_2(state, component) {
 function Component(options) {
 	init(this, options);
 	this._state = assign({}, options.data);
+
+	if (!document.getElementById("svelte-2993651394-style")) add_css();
 
 	var _oncreate = oncreate.bind(this);
 

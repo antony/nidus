@@ -10,6 +10,12 @@
 	{{/if}}
 </div>
 
+<style>
+	.window > .window-content {
+		flex-direction: column;
+	}
+</style>
+
 <script>
 	import Login from '../login/component.html'
 	import Initialise from '../initialise/component.html'
@@ -19,7 +25,6 @@
   export default {
 		oncreate () {
 			ipcRenderer.on('state:change', (event, { state }) => {
-				console.log('state changed to', state)
         this.set({ state })
 			})
 			ipcRenderer.send('application:bootstrap')
