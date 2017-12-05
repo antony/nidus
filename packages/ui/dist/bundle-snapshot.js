@@ -681,13 +681,13 @@ function oncreate$2() {
 }
 
 function encapsulateStyles$2(node) {
-	setAttribute(node, "svelte-2928370946", "");
+	setAttribute(node, "svelte-4183003694", "");
 }
 
 function add_css$2() {
 	var style = createElement("style");
-	style.id = 'svelte-2928370946-style';
-	style.textContent = "dl[svelte-2928370946] > dd,[svelte-2928370946] dl > dd{font-weight:bold;margin:2vw 0 0 0}dl[svelte-2928370946] > dt,[svelte-2928370946] dl > dt{background-color:lightgoldenrodyellow;border:1px solid lightgray;padding:2vw}dt[svelte-2928370946] > .hover-hidden,[svelte-2928370946] dt > .hover-hidden{font-weight:bold;visibility:hidden;float:right}dt[svelte-2928370946]:hover > .hover-hidden,[svelte-2928370946] dt:hover > .hover-hidden{visibility:visible}";
+	style.id = 'svelte-4183003694-style';
+	style.textContent = "dl[svelte-4183003694] > dd,[svelte-4183003694] dl > dd{font-weight:bold;margin:2vw 0 0 0}dl[svelte-4183003694] > dt,[svelte-4183003694] dl > dt{background-color:lightgoldenrodyellow;border:1px solid lightgray;padding:2vw}dt[svelte-4183003694] > .hover-hidden,[svelte-4183003694] dt > .hover-hidden{font-weight:bold;visibility:hidden;float:right}dt[svelte-4183003694]:hover > .hover-hidden,[svelte-4183003694] dt:hover > .hover-hidden{visibility:visible}";
 	appendNode(style, document.head);
 }
 
@@ -715,7 +715,7 @@ function create_main_fragment$4(state, component) {
 			div_1 = createElement("div");
 			form = createElement("form");
 			p = createElement("p");
-			p.textContent = "Enter a keyword to generate a password. For example the url for a site you are trying to log into.";
+			p.textContent = "Enter a keyword to generate a password. For example the url of a site you are trying to log into.";
 			text_4 = createText("\n      ");
 			div_2 = createElement("div");
 			label = createElement("label");
@@ -905,7 +905,7 @@ function Component$4(options) {
 	init(this, options);
 	this._state = assign(data$2(), options.data);
 
-	if (!document.getElementById("svelte-2928370946-style")) add_css$2();
+	if (!document.getElementById("svelte-4183003694-style")) add_css$2();
 
 	var _oncreate = oncreate$2.bind(this);
 
