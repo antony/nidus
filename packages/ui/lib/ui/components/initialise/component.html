@@ -21,7 +21,7 @@
     <ErrorMessage message="{{message}}" />
   </div>
   <div class="panel-footer">
-    <button class="btn btn-primary btn-block" on:click="configure()">
+    <button class="btn btn-primary btn-block {{password.length ? '' : 'disabled'}}" on:click="configure()">
       Save
     </button>
   </div>

@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="panel-footer">
-    <button class="btn btn-primary btn-block" on:click="generate(event)">Generate</button>
+    <button class="btn btn-primary btn-block {{keyword.length && changed ? '' : 'disabled'}}" on:click="generate(event)">Generate</button>
   </div>
 </div>
 
@@ -68,6 +68,7 @@
     data () {
       return {
         generated: null,
+        changed: false,
         keyword: ''
       }
     },
@@ -80,12 +81,15 @@
 
     methods: {
       handleKeyup (event) {
-        if (event.code === 'Enter') {
+        this.set({ changed: true })
+        const keyword = this.get('keyword')
+        if (event.code === 'Enter' && keyword.length) {
           this.generate()
         }
       },
       generate () {
         const keyword = this.get('keyword')
+        this.set({ changed: false })
         ipcRenderer.send('generate', { keyword })
       },
       copy (text) {

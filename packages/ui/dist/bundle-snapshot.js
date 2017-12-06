@@ -358,7 +358,8 @@ function data() {
 
 var methods = {
   handleKeyup (event) {
-    if (event.code === 'Enter') {
+    const password = this.get('password');
+    if (event.code === 'Enter' && password.length) {
       this.login();
     }
   },
@@ -375,7 +376,7 @@ function oncreate$1() {
 }
 
 function create_main_fragment$1(state, component) {
-	var div, div_1, text_2, div_3, div_4, label, text_4, input, input_updating = false, text_6, text_8, div_5, button;
+	var div, div_1, text_2, div_3, div_4, label, text_4, input, input_updating = false, text_6, text_8, div_5, button, button_class_value;
 
 	function input_input_handler() {
 		input_updating = true;
@@ -426,7 +427,7 @@ function create_main_fragment$1(state, component) {
 			addListener(input, "keyup", keyup_handler);
 			div_4.className = "form-group";
 			div_3.className = "panel-body";
-			button.className = "btn btn-primary btn-block";
+			button.className = button_class_value = "btn btn-primary btn-block " + (state.password.length ? '' : 'disabled');
 			addListener(button, "click", click_handler);
 			div_5.className = "panel-footer";
 			div.className = "panel";
@@ -457,6 +458,10 @@ function create_main_fragment$1(state, component) {
 			var errormessage_changes = {};
 			if (changed.message) errormessage_changes.message = state.message;
 			errormessage._set(errormessage_changes);
+
+			if ((changed.password) && button_class_value !== (button_class_value = "btn btn-primary btn-block " + (state.password.length ? '' : 'disabled'))) {
+				button.className = button_class_value;
+			}
 		},
 
 		u: function unmount() {
@@ -705,18 +710,22 @@ const { ipcRenderer: ipcRenderer$3, clipboard } = window.require('electron');
 function data$2() {
   return {
     generated: null,
+    changed: false,
     keyword: ''
   }
 }
 
 var methods$2 = {
   handleKeyup (event) {
-    if (event.code === 'Enter') {
+    this.set({ changed: true });
+    const keyword = this.get('keyword');
+    if (event.code === 'Enter' && keyword.length) {
       this.generate();
     }
   },
   generate () {
     const keyword = this.get('keyword');
+    this.set({ changed: false });
     ipcRenderer$3.send('generate', { keyword });
   },
   copy (text) {
@@ -734,18 +743,18 @@ function oncreate$2() {
 }
 
 function encapsulateStyles$1(node) {
-	setAttribute(node, "svelte-1621541518", "");
+	setAttribute(node, "svelte-1268116280", "");
 }
 
 function add_css$1() {
 	var style = createElement("style");
-	style.id = 'svelte-1621541518-style';
-	style.textContent = "[svelte-1621541518].tile,[svelte-1621541518] .tile{margin:2vh 0}[svelte-1621541518].tile > .tile-action,[svelte-1621541518] .tile > .tile-action{visibility:hidden}[svelte-1621541518].tile:hover > .tile-action,[svelte-1621541518] .tile:hover > .tile-action{visibility:visible}[svelte-1621541518].tile-title,[svelte-1621541518] .tile-title{text-transform:capitalize}[svelte-1621541518].tile-subtitle,[svelte-1621541518] .tile-subtitle{margin:1vh 0}";
+	style.id = 'svelte-1268116280-style';
+	style.textContent = "[svelte-1268116280].tile,[svelte-1268116280] .tile{margin:2vh 0}[svelte-1268116280].tile > .tile-action,[svelte-1268116280] .tile > .tile-action{visibility:hidden}[svelte-1268116280].tile:hover > .tile-action,[svelte-1268116280] .tile:hover > .tile-action{visibility:visible}[svelte-1268116280].tile-title,[svelte-1268116280] .tile-title{text-transform:capitalize}[svelte-1268116280].tile-subtitle,[svelte-1268116280] .tile-subtitle{margin:1vh 0}";
 	appendNode(style, document.head);
 }
 
 function create_main_fragment$4(state, component) {
-	var div, div_1, div_2, div_3, div_4, button, text_2, div_5, text_7, div_6, div_7, label, text_9, input, input_updating = false, text_11, div_8, text_14, div_9, button_1;
+	var div, div_1, div_2, div_3, div_4, button, text_2, div_5, text_7, div_6, div_7, label, text_9, input, input_updating = false, text_11, div_8, text_14, div_9, button_1, button_1_class_value;
 
 	function click_handler(event) {
 		component.logout();
@@ -812,7 +821,7 @@ function create_main_fragment$4(state, component) {
 			addListener(input, "keyup", keyup_handler);
 			div_7.className = "form-group";
 			div_6.className = "panel-body";
-			button_1.className = "btn btn-primary btn-block";
+			button_1.className = button_1_class_value = "btn btn-primary btn-block " + (state.keyword.length && state.changed ? '' : 'disabled');
 			addListener(button_1, "click", click_handler_1);
 			div_9.className = "panel-footer";
 			div.className = "panel";
@@ -859,6 +868,10 @@ function create_main_fragment$4(state, component) {
 				if_block.u();
 				if_block.d();
 				if_block = null;
+			}
+
+			if ((changed.keyword || changed.changed) && button_1_class_value !== (button_1_class_value = "btn btn-primary btn-block " + (state.keyword.length && state.changed ? '' : 'disabled'))) {
+				button_1.className = button_1_class_value;
 			}
 		},
 
@@ -1039,7 +1052,7 @@ function Component$4(options) {
 	init(this, options);
 	this._state = assign(data$2(), options.data);
 
-	if (!document.getElementById("svelte-1621541518-style")) add_css$1();
+	if (!document.getElementById("svelte-1268116280-style")) add_css$1();
 
 	var _oncreate = oncreate$2.bind(this);
 
