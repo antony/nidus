@@ -37,8 +37,33 @@
   },
   "build": {
     "appId": "nidus",
-    "mac": {
-      "category": "Productivity"
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "index.js",
+      "build/**/*"
+    ],
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "category": "Utility",
+      "icon": "build/assets"
+    }
+  },
+  "ignore": {
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    },
+        "mac": {
+      "category": "Productivity",
+      "target": [
+        "dmg"
+      ],
+      "icon": "build/assets/icon.icns"
     },
     "dmg": {
       "contents": [
@@ -53,19 +78,9 @@
           "path": "/Applications"
         }
       ]
-    },
-    "linux": {
-      "target": [
-        "snap",
-        "deb",
-        "tar.bz2"
-      ],
-      "category": "Utility",
-      "icon": "build"
-    },
-    "win": {
-      "target": "NSIS",
-      "icon": "build/icon.ico"
     }
+  },
+  "dependencies": {
+    "nidus-core": "^0.1.0"
   }
 }

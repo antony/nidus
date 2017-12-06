@@ -14,7 +14,7 @@ const plugins = [
   resolve(),
   commonjs({
     include: [
-      'node_modules/nidus'
+      'node_modules/nidus-core'
     ],
   }),
   css(),
@@ -37,9 +37,10 @@ const plugins = [
 function getDevelopmentPlugins () {
   return [
     copy({
-      'lib/ui/app.html': 'dist/index.html'
+      'lib/ui/app.html': 'build/index.html',
+      'lib/ui/assets': 'build/assets'
     }),
-    serve('dist'),
+    serve('build'),
     liveReload()
   ]
 }
@@ -51,7 +52,7 @@ function getProductionPlugins () {
 export default {
   input: 'lib/ui/app.js',
   output: {
-    file: `dist/bundle.js`,
+    file: 'build/bundle.js',
     format: 'iife',
     name: 'bundle'
   },

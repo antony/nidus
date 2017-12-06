@@ -12,7 +12,7 @@ function createWindow () {
     frame: false
   })
 
-  mainWindow.loadURL(`file://${__dirname}/dist/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/build/index.html`)
 }
 
 app.on('ready', createWindow)
