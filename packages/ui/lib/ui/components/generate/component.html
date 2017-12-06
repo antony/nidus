@@ -1,16 +1,7 @@
 <div class="panel">
   <div class="panel-header text-center">
     <div class="panel-title">
-      <div class="columns">
-        <div class="column col-3">
-          <button class="btn btn-primary btn-action btn-lg float-left" on:click="logout()">
-            <i class="icon icon-arrow-left"></i>
-          </button>
-        </div>
-        <div class="column col-6">
-          Generate
-        </div>
-      </div>
+      Generate
     </div>
   </div>
   <div class="panel-body">
@@ -94,9 +85,6 @@
       },
       copy (text) {
         clipboard.writeText(text)
-      },
-      logout () {
-        this.set({ state: 'login' })
       }
     }
   }

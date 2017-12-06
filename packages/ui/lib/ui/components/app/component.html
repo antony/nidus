@@ -1,6 +1,13 @@
 <div class="container">
 	<div class="columns">
 		<div class="column col-12">
+			<button class="btn btn-link btn-action btn-lg float-right" on:click="logout()">
+				<i class="icon icon-shutdown"></i>
+			</button>
+		</div>
+	</div>
+	<div class="columns">
+		<div class="column col-12">
 			{{#if state === 'login'}}
 			<Login />
 			{{/if}}
@@ -28,6 +35,12 @@
         this.set({ state })
 			})
 			ipcRenderer.send('application:bootstrap')
+		},
+
+		methods: {
+      logout () {
+        this.set({ state: 'login' })
+      }
 		},
 
 		components: {
