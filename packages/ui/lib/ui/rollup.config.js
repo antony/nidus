@@ -1,7 +1,6 @@
 import svelte from 'rollup-plugin-svelte'
 import url from 'rollup-plugin-url'
 import babel from 'rollup-plugin-babel'
-import pkg from '../../package.json'
 import copy from 'rollup-plugin-copy'
 import serve from 'rollup-plugin-serve'
 import liveReload from 'rollup-plugin-livereload'
@@ -49,11 +48,10 @@ function getProductionPlugins () {
   return []
 }
 
-const version = developmentMode ? 'snapshot' : `${pkg.version}.min`
 export default {
   input: 'lib/ui/app.js',
   output: {
-    file: `dist/bundle-${version}.js`,
+    file: `dist/bundle.js`,
     format: 'iife',
     name: 'bundle'
   },
