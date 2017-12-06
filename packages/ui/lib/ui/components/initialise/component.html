@@ -1,35 +1,35 @@
-<header class="toolbar toolbar-header">
-  <h1 class="title">Setup</h1>
-</header>
-<div class="window-content">
-  <form>
+<div class="panel">
+  <div class="panel-header text-center">
+    <div class="panel-title">Setup</div>
+  </div>
+  <div class="panel-body">
     <p>
       No configuration found, so we'll create a new one.
     </p>
     <div class="form-group">
-      <label>Master password</label>
-      <input class="form-control" bind:value="password" type="password" />
+      <label class="form-label">Master password</label>
+      <input class="form-input" bind:value="password" type="password" />
     </div>
     <div class="form-group">
-      <label>Password length (characters)</label>
-      <input class="form-control" bind:value="keyLength" type="number" />
+      <label class="form-label">Password length (characters)</label>
+      <input class="form-input" bind:value="keyLength" type="number" />
     </div>
     <div class="form-group">
-      <label>Readable password length (words)</label>
-      <input class="form-control" bind:value="readableLength" type="number" />
+      <label class="form-label">Readable password length (words)</label>
+      <input class="form-input" bind:value="readableLength" type="number" />
     </div>
-  </form>
-</div>
-<footer class="toolbar toolbar-footer">
-  <div class="toolbar-actions">
-    <button on:click="configure()" class="btn btn-primary pull-right">
+    <ErrorMessage message="{{message}}" />
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-primary btn-block" on:click="configure()">
       Save
     </button>
   </div>
-</footer>
+</div>
 
 <script>
   const { ipcRenderer } = window.require('electron')
+  import ErrorMessage from '../error-message/component.html'
 
   export default {
     data () {
@@ -47,6 +47,10 @@
         const readableLength = this.get('readableLength')
         ipcRenderer.send('config:save', { password, keyLength, readableLength })
       }
+    },
+
+    components: {
+      ErrorMessage
     }
   }
 </script>

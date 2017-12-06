@@ -1,22 +1,22 @@
-<div class="window">
-	{{#if state === 'login'}}
-	<Login />
-	{{/if}}
-	{{#if state === 'setup'}}
-	<Initialise />
-	{{/if}}
-	{{#if state === 'generate'}}
-	<Generate />
-	{{/if}}
+<div class="container">
+	<div class="columns">
+		<div class="column col-12">
+			{{#if state === 'login'}}
+			<Login />
+			{{/if}}
+			{{#if state === 'setup'}}
+			<Initialise />
+			{{/if}}
+			{{#if state === 'generate'}}
+			<Generate />
+			{{/if}}
+		</div>
+	</div>
 </div>
 
-<style>
-	.window > .window-content {
-		flex-direction: column;
-	}
-</style>
-
 <script>
+	import 'spectre.css/dist/spectre.css'
+	import 'spectre.css/dist/spectre-icons.css'
 	import Login from '../login/component.html'
 	import Initialise from '../initialise/component.html'
 	import Generate from '../generate/component.html'

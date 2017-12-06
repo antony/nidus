@@ -1,67 +1,63 @@
-<header class="toolbar toolbar-header">
-  <h1 class="title">Generate</h1>
-</header>
-<div class="window-content">
-  <div>
-    <form action="#">
-      <p>
-        Enter a keyword to generate a password. For example the url of a site you are trying to log into.
-      </p>
-      <div class="form-group">
-        <label>Enter seed</label>
-        <input class="form-control" bind:value="keyword" type="text" on:keyup="generate(event)" />
+<div class="panel">
+  <div class="panel-header text-center">
+    <div class="panel-title">
+      <div class="columns">
+        <div class="column col-3">
+          <button class="btn btn-primary btn-action btn-lg float-left" on:click="logout()">
+            <i class="icon icon-arrow-left"></i>
+          </button>
+        </div>
+        <div class="column col-6">
+          Generate
+        </div>
       </div>
-    </form>
+    </div>
   </div>
-  <div>
-    {{#if generated}}
-    <p>
-      Your generated passwords
-    </p>
-    <dl>
-      <dd>
-        Simple:
-      </dd>
-      <dt>
-        {{ simple }}
-        <span class="hover-hidden" on:click="copy(simple)">&#x1f4cb;</span>
-      </dt>
-      <dd>
-        Complex:
-      </dd>
-      <dt>
-        {{ complex }}
-        <span class="hover-hidden" on:click="copy(complex)">&#x1f4cb;</span>
-      </dt>
-      <dd>
-        Readable:
-      </dd>
-      <dt>
-        {{ readable }}
-        <span class="hover-hidden" on:click="copy(readable)">&#x1f4cb;</span>
-      </dt>
-    </dl>
-    {{/if}}
+  <div class="panel-body">
+    <div class="form-group">
+      <label class="form-label">Enter seed</label>
+      <input class="form-input" bind:value="keyword" type="text" on:keyup="handleKeyup(event)" />
+    </div>
+    <div>
+      {{#if generated}}
+      <div class="divider text-center" data-content="GENERATED"></div>
+
+      {{#each ['simple', 'complex', 'readable'] as kind}}
+        <div class="tile">
+          <div class="tile-content">
+            <div class="tile-title"><b>{{kind}}</b></div>
+            <div class="tile-subtitle">{{generated[kind]}}</div>
+          </div>
+          <div class="tile-action">
+            <button class="btn btn-primary btn-action btn-lg" on:click="copy(generated[kind])">
+              <i class="icon icon-share"></i>
+            </button>
+          </div>
+        </div>
+      {{/each}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="panel-footer">
+    <button class="btn btn-primary btn-block" on:click="generate(event)">Generate</button>
   </div>
 </div>
 
 <style>
-  dl > dd {
-    font-weight: bold;
-    margin: 2vw 0 0 0;
+  .tile {
+    margin: 2vh 0;
   }
-  dl > dt {
-    background-color: lightgoldenrodyellow;
-    border: 1px solid lightgray;
-    padding: 2vw;
-  }
-  dt > .hover-hidden {
-    font-weight: bold;
+  .tile > .tile-action {
     visibility: hidden;
-    float: right;
   }
-  dt:hover > .hover-hidden {
+  .tile:hover > .tile-action {
     visibility: visible;
+  }
+  .tile-title {
+    text-transform: capitalize;
+  }
+  .tile-subtitle {
+    margin: 1vh 0;
   }
 </style>
 
@@ -71,28 +67,32 @@
   export default {
     data () {
       return {
-        generated: false,
+        generated: null,
         keyword: ''
       }
     },
 
     oncreate () {
       ipcRenderer.on('generate:results', (event, { simple, complex, readable }) => {
-        this.set({ generated: true, simple, complex, readable })
+        this.set({ generated: { simple, complex, readable } })
 			})
     },
 
     methods: {
-      generate (event) {
+      handleKeyup (event) {
         if (event.code === 'Enter') {
-          const keyword = this.get('keyword')
-          ipcRenderer.send('generate', { keyword })
-          event.preventDefault()
+          this.generate()
         }
-        return false
+      },
+      generate () {
+        const keyword = this.get('keyword')
+        ipcRenderer.send('generate', { keyword })
       },
       copy (text) {
         clipboard.writeText(text)
+      },
+      logout () {
+        this.set({ state: 'login' })
       }
     }
   }
