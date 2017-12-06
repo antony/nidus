@@ -1,7 +1,6 @@
 import svelte from 'rollup-plugin-svelte'
 import url from 'rollup-plugin-url'
 import babel from 'rollup-plugin-babel'
-import uglify from 'rollup-plugin-uglify'
 import pkg from '../../package.json'
 import copy from 'rollup-plugin-copy'
 import serve from 'rollup-plugin-serve'
@@ -47,9 +46,7 @@ function getDevelopmentPlugins () {
 }
 
 function getProductionPlugins () {
-  return [
-    uglify()
-  ]
+  return []
 }
 
 const version = developmentMode ? 'snapshot' : `${pkg.version}.min`

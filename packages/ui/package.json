@@ -3,12 +3,21 @@
   "version": "1.0.0",
   "description": "GUI for nidus",
   "main": "index.js",
+  "private": true,
+  "homepage": "http://nidus.gq",
   "scripts": {
     "test": "ava",
     "watch": "NODE_ENV=development rollup -wc lib/ui/rollup.config.js",
-    "start": "electron ."
+    "start": "electron .",
+    "build": "NODE_ENV=production rollup -c lib/ui/rollup.config.js",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder"
   },
-  "author": "Antony Jones",
+  "author": {
+    "name": "Antony Jones",
+    "email": "ant@nidus.gq"
+  },
+  "repository": "antony/nidus",
   "license": "MIT",
   "devDependencies": {
     "electron": "1.7.9",
@@ -29,7 +38,9 @@
   "dependencies": {},
   "build": {
     "appId": "nidus",
-    "category": "your.app.category.type",
+    "mac": {
+      "category": "Productivity"
+    },
     "dmg": {
       "contents": [
         {
@@ -46,12 +57,15 @@
     },
     "linux": {
       "target": [
-        "AppImage",
-        "deb"
-      ]
+        "snap",
+        "deb",
+        "tar.bz2"
+      ],
+      "category": "Utility",
+      "icon": "build"
     },
     "win": {
-      "target": "squirrel",
+      "target": "NSIS",
       "icon": "build/icon.ico"
     }
   }

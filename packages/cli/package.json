@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Cli for nidus",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "node index.js",
     "test": "ava"
