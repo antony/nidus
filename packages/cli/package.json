@@ -1,7 +1,7 @@
 {
-  "name": "unstore-cli",
+  "name": "nidus-cli",
   "version": "1.0.0",
-  "description": "The password unstore",
+  "description": "Cli for nidus",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

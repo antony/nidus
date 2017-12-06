@@ -9,13 +9,13 @@ const { assign } = Object
 const fingerprint = require('../fingerprint')
 const { verify } = require('../validation')
 
-const DEFAULT_FILENAME = module.exports.DEFAULT_FILENAME = '.unstorepm.json'
+const DEFAULT_FILENAME = module.exports.DEFAULT_FILENAME = '.niduspm.json'
 
 exports.load = function () {
   const path = join(homedir(), DEFAULT_FILENAME)
   const exists = fs.existsSync(path)
   if (!exists) {
-    throw new Error(`Configuration file could not be found. Run 'unstore config' to generate one.`)
+    throw new Error(`Configuration file could not be found. Run 'nidus config' to generate one.`)
   }
   const config = require(path)
   return verify(config)

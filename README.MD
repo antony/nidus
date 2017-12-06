@@ -1,4 +1,4 @@
-## Unstore
+## Nidus
 
 A password store which doesn't store. Instead, it deterministically generates the exact same password for you every time, based on a keyword and your master password.
 
@@ -13,25 +13,25 @@ Currently in early alpha - do not use for production.
 #### Quickstart
 
 ```bash
-npm install -g unstore
-unstore
+npm install -g nidus
+nidus
 ```
 
 #### Slowstart
 
-On first run, unstore will look for a config file. If not found, it will take you through the steps to generate one,
+On first run, nidus will look for a config file. If not found, it will take you through the steps to generate one,
 and then exit.
 
 Once your configuration is generated, you can start to generate passwords:
 
 ```
-unstore show http://www.example.com
+nidus show http://www.example.com
 // Simple q15hBZw8mvxkIxW2
 // Complex XCCS8w/cq.B:^Hx6
 // Readable colors battery blackberry attraction bicycle allegiance
 ```
 
-Unstore will show a simple password, a complex password, and a readable password (a number of words).
+Nidus will show a simple password, a complex password, and a readable password (a number of words).
 The length of the complex and simple passwords is determined by 'keyLength' in your configuration steps.
 The length of the readable password (in words, not characters), is determined by 'readableLength' in your configuration steps.
 You can choose which to use based on restrictions imposed by what the password is used for.

@@ -1,7 +1,7 @@
 {
-  "name": "unstore",
+  "name": "nidus-core",
   "version": "1.0.0",
-  "description": "The password unstore",
+  "description": "Core of nidus, the deterministic password generator",
   "main": "index.js",
   "scripts": {
     "start": "node .",

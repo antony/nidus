@@ -7,7 +7,7 @@ const Vorpal = require('vorpal')
 const inquirer = require('inquirer')
 const { bold  } = require('chalk')
 const ora = require('ora')
-const Api = require('unstore')
+const Api = require('nidus-core')
 const { config, validation } = Api
 
 const clis = { 
@@ -76,7 +76,7 @@ async function unconfigured () {
 
 function configured (api) {
   clis.configured
-    .delimiter('unstore>')
+    .delimiter('nidus>')
 
   clis.configured
     .command('show <keyword>', 'Create/show a password for a given keyword')

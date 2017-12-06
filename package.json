@@ -1,7 +1,7 @@
 {
-  "name": "unstore",
+  "name": "nidus-core",
   "version": "1.0.0",
-  "description": "The password unstore",
+  "description": "The deterministic password store",
   "main": "index.js",
   "scripts": {
     "start:cli": "node index.js",

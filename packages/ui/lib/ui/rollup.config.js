@@ -16,7 +16,7 @@ const plugins = [
   resolve(),
   commonjs({
     include: [
-      'node_modules/unstore'
+      'node_modules/nidus'
     ],
   }),
   css(),
@@ -32,7 +32,7 @@ const plugins = [
     store: true
   }),
   babel({
-    include: 'node_modules/unstore'
+    include: 'node_modules/nidus'
   })
 ]
 

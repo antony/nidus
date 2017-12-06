@@ -10,7 +10,7 @@ import fs from 'fs'
 import fingerprint from '../fingerprint'
 const { assign } = Object
 
-const expectedFilename = join(homedir(), '.unstorepm.json')
+const expectedFilename = join(homedir(), '.niduspm.json')
 
 test.before(t => {
   stub(jsonfile, 'writeFileSync')

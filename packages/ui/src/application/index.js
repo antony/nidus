@@ -1,12 +1,12 @@
 'use strict'
 
 const { ipcMain } = require('electron')
-const unstore = require('unstore')
+const nidus = require('nidus-core')
 
 let api
 
 ipcMain.on('config:save', async (event, { password, keyLength, readableLength }) => {
-  await unstore.config.persist({
+  await nidus.config.persist({
     masterPassword: password,
     cost: 8,
     parallelization: 1,
@@ -32,7 +32,7 @@ ipcMain.on('login', async (event, { password }) => {
 
 exports.bootstrap = async function (mainWindow) {
   try {
-    api = await unstore.create()
+    api = await nidus.create()
     mainWindow.webContents.send('state:change', { state: 'login' })
   } catch (e) {
     mainWindow.webContents.send('state:change', { state: 'setup' })
