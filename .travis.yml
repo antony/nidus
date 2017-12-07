@@ -28,6 +28,7 @@ before_install:
 install:
 - npm install -g lerna
 - lerna bootstrap && lerna bootstrap
+- npm install
 
 script:
 - cd packages/ui
