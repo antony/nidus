@@ -1,11 +1,20 @@
-<div class="container">
-	<div class="columns">
-		<div class="column col-12">
-			<button class="btn btn-link btn-action btn-lg float-right" on:click="logout()">
-				<i class="icon icon-shutdown"></i>
-			</button>
+<header class="navbar" style="-webkit-app-region: drag">
+	<section class="navbar-section">
+		<div class="logo text-center">
+			<b class="navbar-brand">Nidus</b>
 		</div>
-	</div>
+		<button style="-webkit-app-region: no-drag" class="btn btn-link btn-action btn-lg float-right" on:click="logout()">
+			<i class="icon icon-people"></i>
+		</button>
+		<button style="-webkit-app-region: no-drag" class="btn btn-link btn-action btn-lg float-right" on:click="minimize()">
+			<i class="icon icon-minus"></i>
+		</button>
+		<button style="-webkit-app-region: no-drag" class="btn btn-link btn-action btn-lg float-right" on:click="exit()">
+			<i class="icon icon-cross"></i>
+		</button>
+	</section>
+</header>
+<div class="container">
 	<div class="columns">
 		<div class="column col-12">
 			{{#if state === 'login'}}
@@ -20,6 +29,12 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.logo {
+		width: 100%;
+	}
+</style>
 
 <script>
 	import 'spectre.css/dist/spectre.css'
@@ -40,7 +55,13 @@
 		methods: {
       logout () {
         this.set({ state: 'login' })
-      }
+			},
+			exit () {
+				ipcRenderer.send('application:exit')
+			},
+			minimize () {
+				ipcRenderer.send('application:minimize')
+			}
 		},
 
 		components: {

@@ -1,6 +1,6 @@
 'use strict'
 
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, remote } = require('electron')
 const { bootstrap } = require('./src/application')
 
 let mainWindow
@@ -19,6 +19,14 @@ app.on('ready', createWindow)
 
 ipcMain.on('application:bootstrap', () => {
   return bootstrap(mainWindow)
+})
+
+ipcMain.on('application:exit', () => {
+  return app.quit()
+})
+
+ipcMain.on('appliation:minimize', () => {
+  return remote.BrowserWindow.getFocusedWindow().minimize()
 })
 
 app.on('activate', async function () {

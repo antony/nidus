@@ -10,7 +10,7 @@ env:
 services:
 - docker
 
-language: node_js
+language: node_js    
 node_js: '9'
 os:
 - linux
@@ -42,7 +42,6 @@ script:
 
 before_cache:
 - rm -rf $HOME/.cache/electron-builder/wine
-
 
 notifications:
   email: false
