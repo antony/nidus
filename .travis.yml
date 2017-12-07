@@ -26,7 +26,7 @@ before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker pull electronuserland/electron-builder:wine; fi
 
 install:
-- npm install -g lerna
+- npm install -g lerna rollup
 - lerna bootstrap && lerna bootstrap
 
 script:
