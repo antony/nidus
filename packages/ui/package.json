@@ -38,20 +38,20 @@
         "deb"
       ],
       "category": "Utility",
-      "icon": "build/assets"
+      "icon": "lib/ui/assets"
     },
     "win": {
       "target": [
         "NSIS"
       ],
-      "icon": "build/icon.ico"
+      "icon": "lib/ui/assets/icon.ico"
     },
     "mac": {
       "category": "Productivity",
       "target": [
         "dmg"
       ],
-      "icon": "build/assets/icon.icns"
+      "icon": "lib/ui/assets/icon.icns"
     },
     "dmg": {
       "contents": [
