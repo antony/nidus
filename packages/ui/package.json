@@ -10,11 +10,11 @@
     "watch": "NODE_ENV=development rollup -wc lib/ui/rollup.config.js",
     "start": "electron .",
     "build": "NODE_ENV=production rollup -c lib/ui/rollup.config.js",
-    "pack": "npm run build && electron-builder --dir",
-    "dist": "npm run build && electron-builder",
-    "dist:win": "npm run build && electron-builder --win",
-    "dist:mac": "npm run build && electron-builder --macos",
-    "dist:linux": "npm run build && electron-builder --linux"
+    "dist": "npm run build && cp package.json build/ && electron-builder",
+    "dist:pack": "npm run dist -- --dir",
+    "dist:win": "npm run dist -- --win",
+    "dist:mac": "npm run dist -- --macos",
+    "dist:linux": "npm run dist -- --linux"
   },
   "author": {
     "name": "Antony Jones",
@@ -30,7 +30,8 @@
     "files": [
       "src/**/*",
       "index.js",
-      "build/**/*"
+      "build/**/*",
+      "package.json"
     ],
     "linux": {
       "target": [
