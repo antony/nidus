@@ -1,0 +1,42 @@
+osx_image: xcode8.3
+
+dist: trusty
+
+sudo: required
+
+services:
+- docker
+
+language: node_js
+node_js: '9'
+os:
+- linux
+- osx
+
+env:
+  global:
+  - ELECTRON_CACHE=$HOME/.cache/electron
+  - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
+cache:
+  directories:
+  - "$HOME/.npm"
+
+before_install:
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker pull electronuserland/electron-builder:wine; fi
+
+install:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm install; fi
+
+script:
+- if [[ "$TRAVIS_OS_NAME" == "linux"   ]]; then docker run --rm -ti -e GH_TOKEN=$GH_TOKEN --env-file <(env | grep TRAVIS) -v ${PWD}:/project -v ${PWD##*/}-node-modules:/project/node_modules -v ~/.electron:/root/.electron electronuserland/electron-builder:wine /bin/bash -c "npm && npm dist:linux"; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux"   ]]; then docker run --rm -ti -e GH_TOKEN=$GH_TOKEN --env-file <(env | grep TRAVIS) -v ${PWD}:/project -v ${PWD##*/}-node-modules:/project/node_modules -v ~/.electron:/root/.electron electronuserland/electron-builder:wine /bin/bash -c "npm && npm dist:win"; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx"   ]]; then npm dist:mac; fi
+
+
+before_cache:
+- rm -rf $HOME/.cache/electron-builder/wine
+
+
+notifications:
+  email: false
