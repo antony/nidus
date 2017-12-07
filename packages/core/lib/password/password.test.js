@@ -20,7 +20,7 @@ test('generates complex password from signature', t => {
 })
 
 test('generates readable password from signature', t => {
-	t.is(t.context.forms.readable, 'barrymore cabot catholicism chihuahua christianity')
+	t.is(t.context.forms.readable, 'viewpoint gunman eagerness disservice melodrama')
 })
 
 test('lower bounds', testExtents, new Uint8Array([0, 1, 2]), 'abc')

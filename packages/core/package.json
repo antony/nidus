@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "test": "ava"
+    "test": "../../node_modules/.bin/ava"
   },
   "author": "Antony Jones",
   "license": "MIT",

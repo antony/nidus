@@ -2,7 +2,6 @@
 
 const { join } = require('path')
 const pkg = require('../../package.json')
-const cli = require('caporal')
 const Vorpal = require('vorpal')
 const inquirer = require('inquirer')
 const { bold  } = require('chalk')
