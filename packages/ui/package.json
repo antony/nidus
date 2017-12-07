@@ -41,7 +41,9 @@
       "icon": "build/assets"
     },
     "win": {
-      "target": "NSIS",
+      "target": [
+        "NSIS"
+      ],
       "icon": "build/icon.ico"
     },
     "mac": {
