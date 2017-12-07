@@ -1,6 +1,6 @@
 {
   "name": "nidus-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Core of nidus, the deterministic password generator",
   "main": "index.js",
   "scripts": {

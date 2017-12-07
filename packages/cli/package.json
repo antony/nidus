@@ -1,6 +1,6 @@
 {
   "name": "nidus-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cli for nidus",
   "main": "index.js",
   "private": true,
