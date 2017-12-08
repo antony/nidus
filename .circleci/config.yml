@@ -6,10 +6,6 @@ jobs:
 
     working_directory: ~/repo
 
-    environment:
-      - ELECTRON_CACHE=.cache/electron
-      - ELECTRON_BUILDER_CACHE=.cache/electron-builder
-
     steps:
       - checkout
 
@@ -31,7 +27,6 @@ jobs:
             - packages/core/node_modules
             - packages/cli/node_modules
             - packages/ui/node_modules
-            - ./cache
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
