@@ -17,13 +17,13 @@
 <div class="container">
 	<div class="columns">
 		<div class="column col-12">
-			{{#if state === 'login'}}
+			{{#if $state === 'login'}}
 			<Login />
 			{{/if}}
-			{{#if state === 'setup'}}
+			{{#if $state === 'setup'}}
 			<Initialise />
 			{{/if}}
-			{{#if state === 'generate'}}
+			{{#if $state === 'generate'}}
 			<Generate />
 			{{/if}}
 		</div>
@@ -47,14 +47,14 @@
   export default {
 		oncreate () {
 			ipcRenderer.on('state:change', (event, { state }) => {
-        this.set({ state })
+        this.store.set({ state })
 			})
 			ipcRenderer.send('application:bootstrap')
 		},
 
 		methods: {
       logout () {
-        this.set({ state: 'login' })
+        this.store.set({ state: 'login' })
 			},
 			exit () {
 				ipcRenderer.send('application:exit')

@@ -10,7 +10,7 @@
     <ErrorMessage message="{{message}}" />
   </div>
   <div class="panel-footer">
-    <button class="btn btn-primary btn-block {{password.length ? '' : 'disabled'}}" on:click="login()">Unlock</button>
+    <button class="btn btn-primary btn-block {{ loading ? 'loading' : '' }} {{password.length ? '' : 'disabled'}}" on:click="login()">Unlock</button>
   </div>
 </div>
 
@@ -22,13 +22,18 @@
     data () {
       return {
         password: '',
-        message: null
+        message: null,
+        loading: false
       }
     },
 
     oncreate () {
+      ipcRenderer.on('login:success', (event) => {
+        this.set({ loading: false })
+        this.store.set({ state: 'generate' })
+			})
       ipcRenderer.on('login:error', (event, { message }) => {
-        this.set({ message })
+        this.set({ loading: false, message })
 			})
     },
 
@@ -36,6 +41,7 @@
       handleKeyup (event) {
         const password = this.get('password')
         if (event.code === 'Enter' && password.length) {
+          this.set({ loading: true })
           this.login()
         }
       },

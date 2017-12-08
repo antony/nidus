@@ -30,7 +30,7 @@
     </div>
   </div>
   <div class="panel-footer">
-    <button class="btn btn-primary btn-block {{keyword.length && changed ? '' : 'disabled'}}" on:click="generate(event)">Generate</button>
+    <button class="btn btn-primary btn-block {{ loading ? 'loading' : '' }} {{keyword.length && changed ? '' : 'disabled'}}" on:click="generate(event)">Generate</button>
   </div>
 </div>
 
@@ -60,13 +60,14 @@
       return {
         generated: null,
         changed: false,
-        keyword: ''
+        keyword: '',
+        loading: false
       }
     },
 
     oncreate () {
       ipcRenderer.on('generate:results', (event, { simple, complex, readable }) => {
-        this.set({ generated: { simple, complex, readable } })
+        this.set({ loading: false, generated: { simple, complex, readable } })
 			})
     },
 
@@ -80,7 +81,7 @@
       },
       generate () {
         const keyword = this.get('keyword')
-        this.set({ changed: false })
+        this.set({ changed: false, loading: true })
         ipcRenderer.send('generate', { keyword })
       },
       copy (text) {

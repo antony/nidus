@@ -13,7 +13,7 @@ class Api {
     async login (password) {
         const match = await fingerprint.compare(password, this.config.fingerprint)
         if (!match) {
-            throw new Error('Master password is incorrect')
+            throw new Error('Supplied password does not match fingerprint')
         }
         this.password = password
         return match
