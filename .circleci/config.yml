@@ -51,7 +51,7 @@ jobs:
             sudo dpkg --add-architecture i386 
             wget -nc https://dl.winehq.org/wine-builds/Release.key
             sudo apt-key add Release.key
-            sudo echo "deb https://dl.winehq.org/wine-builds/debian/ jessie main" >> /etc/apt/sources.list
+            sudo -s echo "deb https://dl.winehq.org/wine-builds/debian/ jessie main" > /etc/apt/sources.list.d/wine.list
             sudo apt-get update
             echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
             sudo apt-get install --install-recommends -y winehq-stable
