@@ -39,10 +39,10 @@ jobs:
           working_directory: ~/repo/packages/ui
           command: npm run dist:linux
 
-      # - run:
-      #     name: MacOS
-      #     working_directory: ~/repo/packages/ui
-      #     command: npm run dist:mac
+      - run:
+          name: MacOS
+          working_directory: ~/repo/packages/ui
+          command: npm run dist:mac
 
       - run:
           name: Windows

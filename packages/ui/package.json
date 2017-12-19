@@ -14,7 +14,7 @@
     "dist:pack": "npm run dist -- --dir",
     "dist:all": "npm run dist -- -mwl",
     "dist:win": "npm run dist -- --win",
-    "dist:mac": "npm run dist -- --macos",
+    "dist:mac": "npm run dist -- --macos tar.gz",
     "dist:linux": "npm run dist -- --linux"
   },
   "author": {
