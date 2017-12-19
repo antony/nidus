@@ -4,8 +4,6 @@
   </a>
 </p>
 
-## Nidus
-
 [![CircleCI](https://circleci.com/gh/antony/nidus/tree/master.svg?style=shield)](https://circleci.com/gh/antony/nidus/tree/master) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-green.svg)](https://github.com/feross/standard) [![npm](	https://img.shields.io/npm/v/nidus-core.svg)](https://npmjs.org/package/nidus-core)
 
 A password store which doesn't store. Instead, it deterministically generates the exact same password for you every time, based on a keyword and your master password.
