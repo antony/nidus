@@ -35,17 +35,6 @@ jobs:
           command: npm test
 
       - run:
-          name: Linux
+          name: Build and Publish Executables
           working_directory: ~/repo/packages/ui
-          command: npm run dist:linux
-
-      - run:
-          name: MacOS
-          working_directory: ~/repo/packages/ui
-          command: npm run dist:mac
-
-      - run:
-          name: Windows
-          working_directory: ~/repo/packages/ui
-          command: |
-            npm run dist:win
+          command: npm run dist:all
