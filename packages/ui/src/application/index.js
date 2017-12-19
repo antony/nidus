@@ -62,6 +62,8 @@ exports.create = function () {
       frame: false
     })
 
-    mainWindow.loadURL(`file://${__dirname}/../../build/index.html`)
+    mainWindow.toggleDevTools()
+
+    mainWindow.loadURL(`file://${__dirname}/../../dist/app.html`)
   }
 }

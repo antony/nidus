@@ -29,7 +29,7 @@
 
 <script>
   const { ipcRenderer } = window.require('electron')
-  import ErrorMessage from '../error-message/component.html'
+  import ErrorMessage from '../error-message/component.svelte'
 
   export default {
     data () {

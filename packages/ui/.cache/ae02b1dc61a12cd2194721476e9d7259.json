@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"html":"<!doctype html>\n\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <title>Nidus</title>\n  </head>\n\n  <body>\n    <div class=\"app\">\n    </div>\n    <script>\n      require('./app.js')\n    </script>\n  </body>\n</html>"},"hash":"6728e388230c5474608cf32e0f720d01"}

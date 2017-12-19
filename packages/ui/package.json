@@ -75,6 +75,7 @@
   "devDependencies": {
     "electron": "1.7.9",
     "electron-builder": "^19.48.2",
+    "parcel-plugin-svelte": "^0.1.1-alpha",
     "rollup": "^0.52.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "^8.2.6",

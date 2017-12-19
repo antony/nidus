@@ -1,4 +1,4 @@
-import App from './components/app/component.html'
+import App from './components/app/component.svelte'
 import { Store } from 'svelte/store'
 
 const store = new Store({})

@@ -39,9 +39,9 @@
 <script>
 	import 'spectre.css/dist/spectre.css'
 	import 'spectre.css/dist/spectre-icons.css'
-	import Login from '../login/component.html'
-	import Initialise from '../initialise/component.html'
-	import Generate from '../generate/component.html'
+	import Login from '../login/component.svelte'
+	import Initialise from '../initialise/component.svelte'
+	import Generate from '../generate/component.svelte'
 	const { ipcRenderer } = window.require('electron')
 
   export default {
