@@ -1,4 +1,10 @@
+<div style="text-align:center">
+![Nidus](assets/logo.png)
+</div>
+
 ## Nidus
+
+[![CircleCI](https://circleci.com/gh/antony/nidus/tree/master.svg?style=shield)](https://circleci.com/gh/antony/nidus/tree/master)
 
 A password store which doesn't store. Instead, it deterministically generates the exact same password for you every time, based on a keyword and your master password.
 
