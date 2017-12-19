@@ -1,0 +1,17 @@
+{
+  "name": "nidus-site",
+  "version": "1.0.0",
+  "description": "Nidus website",
+  "main": "parcel index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antony Jones",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "^4.0.0-beta.2",
+    "jquery": "^3.2.1",
+    "owl.carousel2": "^2.2.1",
+    "parcel-bundler": "^1.2.0"
+  }
+}

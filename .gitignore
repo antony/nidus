@@ -1,3 +1,5 @@
 node_modules/
 packages/ui/build/*
 packages/ui/dist/*
+site/dist/*
+site/.cache/*
