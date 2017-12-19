@@ -2,8 +2,6 @@
 
 import $ from 'jquery'
 
-window.jQuery = $
-
 import 'bootstrap'
 //import 'owl.carousel2'
 // import './js/script'
