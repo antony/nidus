@@ -12,6 +12,7 @@
     "build": "NODE_ENV=production rollup -c lib/ui/rollup.config.js",
     "dist": "npm run build && cp package.json build/ && electron-builder",
     "dist:pack": "npm run dist -- --dir",
+    "dist:all": "npm run dist -- -mwl",
     "dist:win": "npm run dist -- --win",
     "dist:mac": "npm run dist -- --macos",
     "dist:linux": "npm run dist -- --linux"

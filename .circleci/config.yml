@@ -48,7 +48,8 @@ jobs:
           name: Windows
           working_directory: ~/repo/packages/ui
           command: |
-            sudo dpkg --add-architecture i386 
+            sudo dpkg --add-architecture i386
+            sudo apt-get update && sudo apt-get install apt-transport-https
             wget -nc https://dl.winehq.org/wine-builds/Release.key
             sudo apt-key add Release.key
             sudo sh -c 'echo "deb https://dl.winehq.org/wine-builds/debian/ jessie main" > /etc/apt/sources.list.d/wine.list'
