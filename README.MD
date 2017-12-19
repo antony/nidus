@@ -1,6 +1,8 @@
-<div style="text-align:center">
-[![Nidus](assets/logo-299x145.png)]
-</div>
+<p align="center">
+  <a href="https://npmjs.org/package/nidus-core" target="_blank">
+    <img alt="Nidus" src="https://raw.githubusercontent.com/antony/nidus/master/assets/logo-299x145.png" width="299">
+  </a>
+</p>
 
 ## Nidus
 
