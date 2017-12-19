@@ -38,3 +38,20 @@ jobs:
           name: Build and Publish Executables
           working_directory: ~/repo/packages/ui
           command: npm run dist:all
+
+workflows:
+  version: 2
+  un-tagged-build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              ignore: /^.*/
+  tagged-build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /v.*/
