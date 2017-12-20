@@ -22,7 +22,8 @@ const plugins = [
     limit: 1024 * 100,
     include: [
       'lib/fonts/*.ttf',
-      'lib/ui/components/**/*.svg'
+      'lib/ui/components/**/*.svg',
+      'lib/ui/assets/**.svg'
     ]
   }),
   svelte({
