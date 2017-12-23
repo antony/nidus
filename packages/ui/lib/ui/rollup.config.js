@@ -31,15 +31,15 @@ const plugins = [
   }),
   babel({
     include: 'node_modules/nidus'
+  }),
+  copy({
+    'lib/ui/app.html': 'build/index.html',
+    'lib/ui/assets': 'build/assets'
   })
 ]
 
 function getDevelopmentPlugins () {
   return [
-    copy({
-      'lib/ui/app.html': 'build/index.html',
-      'lib/ui/assets': 'build/assets'
-    }),
     serve('build'),
     liveReload()
   ]
