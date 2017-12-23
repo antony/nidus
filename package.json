@@ -1,6 +1,6 @@
 {
-  "name": "nidus-core",
-  "version": "1.1.1",
+  "name": "nidus-lerna",
+  "version": "0.0.0",
   "description": "The deterministic password store",
   "main": "index.js",
   "scripts": {
