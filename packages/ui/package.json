@@ -73,6 +73,7 @@
     "nidus-core": "^1.0.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "electron": "1.7.9",
     "electron-builder": "^19.48.2",
     "rollup": "^0.52.0",

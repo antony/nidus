@@ -18,7 +18,7 @@ jobs:
           name: Install Dependencies
           command: |
             sudo npm install -g lerna
-            lerna bootstrap && lerna bootstrap
+            lerna bootstrap
             npm install
 
       - save_cache:
@@ -37,7 +37,9 @@ jobs:
       - run:
           name: Build and Publish Executables
           working_directory: ~/repo/packages/ui
-          command: npm run dist:all
+          command: |
+            npm install
+            npm run dist:all
 
 workflows:
   version: 2
